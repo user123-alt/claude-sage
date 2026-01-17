@@ -1,0 +1,46 @@
+{
+  "model": "sonnet",
+  "alwaysThinkingEnabled": true,
+
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(git:*)",
+      "Bash(python:*)",
+      "Bash(node:*)",
+      "Bash(pip:*)",
+      "Bash(cargo:*)",
+      "Read(*)",
+      "Grep(*)",
+      "Glob(*)"
+    ],
+    "deny": [
+      "Bash(rm:-rf:*)",
+      "Bash(rm:-fr:*)",
+      "Bash(del:*)",
+      "Bash(format:*)",
+      "Bash(dd:*)"
+    ]
+  },
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'File updated: $FILE'"
+          }
+        ]
+      }
+    ]
+  },
+
+  "env": {
+    "MAX_THINKING_TOKENS": "31999",
+    "ENABLE_TOOL_SEARCH": "auto",
+    "NODE_ENV": "development"
+  }
+}
